@@ -11,7 +11,16 @@
   <% @microposts.each do |micropost| %>
   <li>
     <%= micropost.message %>
+    <%= link_to "返信", new_reply_path(micropost_id: micropost.id, topic_id:micropost.topic_id) %>
     <%= link_to "削除", micropost_path(micropost), method: :delete, data: { confirm: "コメントを削除しますか？"} %>
-  </li>  
+  </li>
+    <% @replies.each do |reply| %>
+      <% if reply.micropost_id == micropost.id %>
+      <li>
+      |　<%= reply.reply %>
+      <%= link_to '削除', reply_path(reply),method: :delete, data: {confirm: "返信を削除しますか"} %>
+      </li>
+      <% end %>
+    <% end %>  
   <% end %>
 </ul>

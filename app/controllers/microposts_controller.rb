@@ -8,6 +8,7 @@ class MicropostsController < ApplicationController
     micropost = Micropost.find(params[:id])
     topic_id = micropost.topic_id
     micropost.destroy
+    Reply.where(micropost_id: params[:id]).destroy_all
     redirect_to topic_url(topic_id)
   end
 

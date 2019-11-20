@@ -11,6 +11,8 @@ class TopicsController < ApplicationController
 
   def destroy
     Topic.find(params[:id]).destroy
+    Micropost.where(topic_id: params[:id]).destroy_all
+    Reply.where(topic_id: params[:id]).destroy_all
     redirect_to root_url
   end
 
@@ -28,6 +30,7 @@ class TopicsController < ApplicationController
   def show
     @topic = Topic.find(params[:id])
     @microposts = Micropost.where(topic_id: params[:id])
+    @replies = Reply.where(topic_id: params[:id])
     @new_micropost = Micropost.new(:topic_id => params[:id])
   end
 
