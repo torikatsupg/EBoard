@@ -1,0 +1,18 @@
+<h1>Topics#index</h1>
+
+<h2>トピック作成</h2>
+<%= form_for(@new_topic) do |f|%>
+<%= f.text_field :title %>
+<%= f.submit "トピック作成" %>
+<% end %>
+
+<h2>トピック一覧</h2>
+<ul>
+  <% @topics.each do |topic| %>
+    <li>
+      <%= topic.title %>
+      <%= link_to "更新", edit_topic_path(topic) %>
+      <%= link_to '削除', topic_path(topic), method: :delete, data: { confirm:"本当に削除しますか" } %>
+    </li>
+  <% end %>
+</ul>
