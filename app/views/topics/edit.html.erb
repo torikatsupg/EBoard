@@ -1,7 +1,16 @@
-<h1>Topics#edit</h1>
-
-<%= form_for(@topic) do |f| %>
-<%= f.label :title, "タイトル" %>
-<%= f.text_field :title %>
-<%= f.submit "タイトルを更新"%>
+<h1>タイトル編集</h1>
+<hr>
+<%= form_for(@topic) do |f|%>
+<div class="row">
+  <div class="col-8">
+    <div class="form-group">
+      <%= f.text_field :title, :class => "form-control-plaintext border", :placeholder => "タイトル…" %>
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="form-group">
+      <%= f.submit "タイトル更新", :class => "btn btn-primary" %>
+    </div>
+  </div>
+</div>
 <% end %>

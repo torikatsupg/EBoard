@@ -1,19 +1,34 @@
-<h1>Replies#new</h1>
+<h2>返信ページ</h2>
 
-<h2><%= @micropost.message %></h2>
+<hr>
+
+<h3>返信一覧</h3>
+<div class="card">
+  <div class="h3 card-body">
+    <%= @micropost.message %>
+  </div>
+  <% @replies.each do |reply| %>
+  <div class="card-footer">
+  ー　<%= reply.reply %>
+  <%= link_to '削除', reply_path(reply),method: :delete, data: {confirm: "返信を削除しますか"}, :class => "float-right btn btn-outline-danger" %>
+  </div>
+  <% end %>
+</div>
+<hr>
 
 <%= form_for(@new_reply) do |f|%>
-<%= f.hidden_field :topic_id %>
+<%= f.hidden_field :topic_id ,:html => { :class =>"form-controle" }%>
 <%= f.hidden_field :micropost_id %>
-<%= f.text_field :reply %>
-<%= f.submit "メッセージを送信" %>
+<div class="row">
+  <div class="col-8">
+    <div class="form-group">
+      <%= f.text_field :reply, :class => "form-control-plaintext border", :placeholder => "リプライ" %>
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="form-group">
+      <%= f.submit "返信", :class => "btn btn-primary" %>
+    </div>
+  </div>
+</div>
 <% end %>
-
-<ul>
-  <% @replies.each do |reply| %>
-  <li>
-  <%= reply.reply %>
-  <%= link_to '削除', reply_path(reply),method: :delete, data: {confirm: "返信を削除しますか"} %>
-  </li>
-  <% end %>
-</ul>
