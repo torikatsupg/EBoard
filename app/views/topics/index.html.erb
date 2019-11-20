@@ -10,7 +10,7 @@
 <ul>
   <% @topics.each do |topic| %>
     <li>
-      <%= topic.title %>
+      <%= link_to topic.title, topic_path(topic) %>
       <%= link_to "更新", edit_topic_path(topic) %>
       <%= link_to '削除', topic_path(topic), method: :delete, data: { confirm:"本当に削除しますか" } %>
     </li>

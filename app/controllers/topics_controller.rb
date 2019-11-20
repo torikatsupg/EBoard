@@ -25,6 +25,12 @@ class TopicsController < ApplicationController
     redirect_to root_url
   end
 
+  def show
+    @topic = Topic.find(params[:id])
+    @microposts = Micropost.where(topic_id: params[:id])
+    @new_micropost = Micropost.new(:topic_id => params[:id])
+  end
+
   private
 
   def topic_params
