@@ -3,6 +3,13 @@
 <%= form_for(@new_micropost) do |f|%>
 <%= f.hidden_field :topic_id %>
 <div class="row">
+  <div class="col">
+    <div class="form_group">
+    <%= f.file_field :image %>
+    </div>
+   </div>
+</div>
+<div class="row">
   <div class="col-8">
     <div class="form-group">
       <%= f.text_field :message, :class => "form-control-plaintext border", :placeholder => "メッセージ本文" %>
@@ -21,7 +28,10 @@
 <% @microposts.each do |micropost| %>
 <div class="card">
   <div class="card-body">
-    <%= micropost.message %>
+    <%= micropost.message %><br>
+    <% if !micropost.image.blank? %>
+    <%= image_tag micropost.image.thumb.url %>  
+    <% end %>
     <div class="float-right">
     <%= link_to "返信", new_reply_path(micropost_id: micropost.id, topic_id:micropost.topic_id), :class => " btn btn-outline-success"  %>
     <%= link_to "削除", micropost_path(micropost), method: :delete, data: { confirm: "コメントを削除しますか？"}, :class => "btn btn-outline-danger" %>

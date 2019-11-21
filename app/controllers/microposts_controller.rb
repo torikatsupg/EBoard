@@ -15,6 +15,6 @@ class MicropostsController < ApplicationController
   private
 
   def micropost_params
-    params.require(:micropost).permit(:message, :topic_id)
+    params.require(:micropost).permit(:message, :topic_id, :image)
   end
 end
