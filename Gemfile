@@ -9,6 +9,10 @@ gem 'carrierwave'
 gem 'rmagick'
 # ----------------------------
 
+# ページネーションーーーーーー
+gem 'will_paginate',           '3.1.7'
+gem 'bootstrap-will_paginate', '1.0.0'
+# ーーーーーーーーーーーーーーーー
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.1'
 # Use Puma as the app server

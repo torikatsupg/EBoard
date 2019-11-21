@@ -17,6 +17,8 @@
 
 <hr>
 
+<%= will_paginate previous_label: '&lt 前へ', next_label: '次へ &gt'%>
+
 <% @topics.each do |topic| %>
   <div class="card">
     <div class="card-header">
@@ -33,3 +35,5 @@
     </div>
   </div>
 <% end %>
+
+<%= will_paginate %>

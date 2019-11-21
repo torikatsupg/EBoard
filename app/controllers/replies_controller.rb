@@ -7,6 +7,7 @@ class RepliesController < ApplicationController
 
   def create
     Reply.create(reply_params)
+    flash[:success] = "返信しました"
     redirect_to topic_url(params[:reply][:topic_id])
   end
 
@@ -14,6 +15,7 @@ class RepliesController < ApplicationController
     reply = Reply.find(params[:id])
     topic_id = reply.topic_id
     reply.destroy
+    flash[:danger] = "返信を削除しました"
     redirect_to topic_url(topic_id)
   end
 

@@ -1,11 +1,12 @@
 class TopicsController < ApplicationController
   def index
     @new_topic = Topic.new
-    @topics = Topic.all
+    @topics = Topic.paginate(page: params[:page], per_page: 15)
   end
 
   def create
     Topic.create(topic_params)
+    flash[:success] = "トピックを作成しました"
     redirect_to root_url
   end
 
@@ -13,6 +14,7 @@ class TopicsController < ApplicationController
     Topic.find(params[:id]).destroy
     Micropost.where(topic_id: params[:id]).destroy_all
     Reply.where(topic_id: params[:id]).destroy_all
+    flash[:danger] = "トピックを削除しました"
     redirect_to root_url
   end
 
@@ -24,6 +26,7 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:id])
     @topic.title = params[:topic][:title]
     @topic.save
+    flash[:success] = "トピックを更新しました"
     redirect_to root_url
   end
 
