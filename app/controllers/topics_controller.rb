@@ -1,7 +1,11 @@
 class TopicsController < ApplicationController
   def index
     @new_topic = Topic.new
-    @topics = Topic.paginate(page: params[:page], per_page: 15)
+    @topics = Topic.search(params[:search]).paginate(page: params[:page], per_page:10)
+    @is_search = false
+    if params[:search]
+      @is_search = true
+    end
   end
 
   def create
@@ -35,6 +39,11 @@ class TopicsController < ApplicationController
     @microposts = Micropost.where(topic_id: params[:id])
     @replies = Reply.where(topic_id: params[:id])
     @new_micropost = Micropost.new(:topic_id => params[:id])
+  end
+
+  def reset
+    params[:search] = nil
+    redirect_to root_url
   end
 
   private

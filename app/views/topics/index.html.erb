@@ -17,7 +17,36 @@
 
 <hr>
 
-<%= will_paginate previous_label: '&lt 前へ', next_label: '次へ &gt'%>
+<%= form_tag(topics_path, method: "get") do %>
+<div class="row">
+  <div class="col-8">
+    <div class="form-group">
+      <%= label_tag(:search, "検索ワード") %>
+      <%= text_field_tag(:search) %>
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="form-group">
+      <%= submit_tag("検索", :class => "btn btn-primary") %>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<% if @is_search %>
+<div class="row">
+  <div class="col-8">
+  [<%= params[:search] %>]の検索結果
+  </div>
+  <div class="col-4">
+  <%= link_to "検索結果をリセット", 'reset', :class => "btn btn-outline-info" %>
+  </div>
+</div>
+<% end %>
+
+<hr>
+
+<%= will_paginate :previous_label => ' &lt 前へ', :next_label => '次へ &gt' %>
 
 <% @topics.each do |topic| %>
   <div class="card">
@@ -26,9 +55,9 @@
     </div>
     <div class="card-body">
       <h5 class="card-title">
-        <%= link_to topic.title, topic_path(topic) %> | <%= Micropost.where(topic_id: topic.id).count %>
+        <%= link_to topic.title, topic_path(topic) %> | <%= Micropost.where(topic_id: topic.id).count %>コメ
         <span class="float-right">
-          <%= link_to "更新", edit_topic_path(topic), :class => " btn btn-outline-success" %>
+          <%= link_to "編集", edit_topic_path(topic), :class => " btn btn-outline-success" %>
           <%= link_to '削除', topic_path(topic), method: :delete, data: { confirm:"本当に削除しますか" }, :class => "btn btn-outline-danger" %>
         </span>
       </h5>
@@ -36,4 +65,4 @@
   </div>
 <% end %>
 
-<%= will_paginate %>
+<%= will_paginate  :previous_label => ' &lt 前へ', :next_label => '次へ &gt' %>
