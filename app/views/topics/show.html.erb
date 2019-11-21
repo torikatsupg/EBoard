@@ -1,4 +1,7 @@
 <h1>トピック:<%= @topic.title %></h1>
+
+<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="btn btn-outline-primary" data-show-count="false" data-lang="ja">Share Twitter!</a>
+
 <hr>
 <%= form_for(@new_micropost) do |f|%>
 <%= f.hidden_field :topic_id %>
@@ -47,5 +50,7 @@
   <% end %>  
 </div>
 <% end %>
+
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 

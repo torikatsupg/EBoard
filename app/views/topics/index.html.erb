@@ -26,7 +26,7 @@
     </div>
     <div class="card-body">
       <h5 class="card-title">
-        <%= link_to topic.title, topic_path(topic) %>
+        <%= link_to topic.title, topic_path(topic) %> | <%= Micropost.where(topic_id: topic.id).count %>
         <span class="float-right">
           <%= link_to "更新", edit_topic_path(topic), :class => " btn btn-outline-success" %>
           <%= link_to '削除', topic_path(topic), method: :delete, data: { confirm:"本当に削除しますか" }, :class => "btn btn-outline-danger" %>
